@@ -19,10 +19,14 @@ import {
 } from '@angular/forms'
 import { MDCCheckboxFoundation } from '@material/checkbox'
 
+//const MDC_CHECKBOX_STYLES = require('@material/checkbox/mdc-checkbox.scss')
+
 @Component({
   selector: 'mdc-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: [ '@material/checkbox/mdc-checkbox.scss' ],
+  styleUrls: [ './checkbox.component.scss' ],
+  //styleUrls: [ '~@material/checkbox/mdc-checkbox.scss' ],
+  //styles: [String(MDC_CHECKBOX_STYLES)],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

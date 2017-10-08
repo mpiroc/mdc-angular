@@ -21,6 +21,11 @@
       "styles": [
         "styles.css"
       ],
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "../node_modules"
+        ]
+      },
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -54,7 +59,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }
