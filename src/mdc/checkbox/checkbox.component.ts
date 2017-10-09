@@ -8,7 +8,7 @@ import {
   Input,
   OnDestroy,
   Output,
-  Renderer,
+  Renderer2,
   ViewChild,
   ViewEncapsulation,
   forwardRef,
@@ -18,6 +18,7 @@ import {
   ControlValueAccessor,
 } from '@angular/forms'
 import { MDCCheckboxFoundation } from '@material/checkbox'
+import { Unlisteners } from '../utils/unlisteners'
 
 @Component({
   selector: 'mdc-checkbox',
@@ -41,32 +42,31 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
 
   onTouched: () => any = () => {}
 
-  private _controlValueAccessorChangeFn: (value: any) => void = (value) => {}
-  private _unlisteners: Map<string, WeakMap<EventListener, Function>> =
-    new Map<string, WeakMap<EventListener, Function>>()
+  private controlValueAccessorChangeFn: (value: any) => void = (value) => {}
+  private readonly unlisteners: Unlisteners
 
-  private _mdcAdapter: MDCCheckboxAdapter = {
+  private mdcAdapter: MDCCheckboxAdapter = {
     addClass: (className: string) => {
-      this._renderer.setElementClass(this._root.nativeElement, className, true)
+      this.renderer.addClass(this.root.nativeElement, className)
     },
     removeClass: (className: string) => {
-      this._renderer.setElementClass(this._root.nativeElement, className, false)
+      this.renderer.removeClass(this.root.nativeElement, className)
     },
     registerAnimationEndHandler: (listener: EventListener) => {
-      if (this._root) {
-        this.listen('animationend', listener)
+      if (this.root) {
+        this.unlisteners.listen(this.root.nativeElement, 'animationend', listener)
       }
     },
     deregisterAnimationEndHandler: (listener: EventListener) => {
-      this.unlisten('animationend', listener)
+      this.unlisteners.unlisten('animationend', listener)
     },
     registerChangeHandler: (listener: EventListener) => {
-      if (this._root) {
-        this.listen('change', listener, this.nativeCheckbox)
+      if (this.root) {
+        this.unlisteners.listen(this.nativeCheckbox.nativeElement, 'change', listener)
       }
     },
     deregisterChangeHandler: (listener: EventListener) => {
-      this.unlisten('change', listener)
+      this.unlisteners.unlisten('change', listener)
     },
     getNativeControl: () => {
       if (!this.nativeCheckbox) {
@@ -76,19 +76,21 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
       return this.nativeCheckbox.nativeElement
     },
     forceLayout: () => {
-      if (this._root) {
-        return this._root.nativeElement.offsetWidth
+      if (this.root) {
+        return this.root.nativeElement.offsetWidth
       }
     },
-    isAttachedToDOM: () => !!this._root
+    isAttachedToDOM: () => !!this.root
   }
 
   private readonly _foundation: {
     init: Function,
     destroy: Function,
-  } = new MDCCheckboxFoundation(this._mdcAdapter)
+  } = new MDCCheckboxFoundation(this.mdcAdapter)
 
-  constructor(private _renderer: Renderer, private _root: ElementRef) {}
+  constructor(private renderer: Renderer2, private root: ElementRef) {
+    this.unlisteners = new Unlisteners(renderer)
+  }
 
   ngAfterViewInit() {
     this._foundation.init()
@@ -100,7 +102,7 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
 
   handleChange(event: Event) {
     event.stopPropagation()
-    this._controlValueAccessorChangeFn((event.target as any).checked)
+    this.controlValueAccessorChangeFn((event.target as any).checked)
     this.change.emit(event)
   }
 
@@ -109,31 +111,10 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
   }
 
   registerOnChange(fn: (value: any) => void) {
-    this._controlValueAccessorChangeFn = fn
+    this.controlValueAccessorChangeFn = fn
   }
 
   registerOnTouched(fn: any) {
     this.onTouched = fn
-  }
-
-  listen(type: string, listener: EventListener, ref: ElementRef = this._root) {
-    if (!this._unlisteners.has(type)) {
-      this._unlisteners.set(type, new WeakMap<EventListener, Function>())
-    }
-    const unlistener = this._renderer.listen(ref.nativeElement, type, listener)
-    this._unlisteners.get(type).set(listener, unlistener)
-  }
-
-  unlisten(type: string, listener: EventListener) {
-    if (!this._unlisteners.has(type)) {
-      return;
-    }
-
-    const unlisteners = this._unlisteners.get(type)
-    if (!unlisteners.has(listener)) {
-      return;
-    }
-    unlisteners.get(listener)()
-    unlisteners.delete(listener)
   }
 }
