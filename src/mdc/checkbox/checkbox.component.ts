@@ -19,14 +19,10 @@ import {
 } from '@angular/forms'
 import { MDCCheckboxFoundation } from '@material/checkbox'
 
-//const MDC_CHECKBOX_STYLES = require('@material/checkbox/mdc-checkbox.scss')
-
 @Component({
   selector: 'mdc-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: [ './checkbox.component.scss' ],
-  //styleUrls: [ '~@material/checkbox/mdc-checkbox.scss' ],
-  //styles: [String(MDC_CHECKBOX_STYLES)],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -39,8 +35,6 @@ import { MDCCheckboxFoundation } from '@material/checkbox'
 })
 export class CheckboxComponent implements AfterViewInit, OnDestroy {
   @Input() checked: boolean = false
-  @Input() indeterminate: boolean = false
-  @Input() labelId: string
   @Output() change: EventEmitter<Event> = new EventEmitter<Event>()
   @HostBinding('class') className: string = 'mdc-checkbox'
   @ViewChild('nativeCheckbox') nativeCheckbox: ElementRef
@@ -60,11 +54,11 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
     },
     registerAnimationEndHandler: (listener: EventListener) => {
       if (this._root) {
-        this.listen(MDCCheckboxFoundation.strings.ANIM_END_EVENT_NAME, listener)
+        this.listen('animationend', listener)
       }
     },
     deregisterAnimationEndHandler: (listener: EventListener) => {
-      this.unlisten(MDCCheckboxFoundation.strings.ANIM_END_EVENT_NAME, listener)
+      this.unlisten('animationend', listener)
     },
     registerChangeHandler: (listener: EventListener) => {
       if (this._root) {
@@ -75,12 +69,11 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
       this.unlisten('change', listener)
     },
     getNativeControl: () => {
-      const { nativeCheckbox } = this
-      if (!nativeCheckbox) {
+      if (!this.nativeCheckbox) {
         throw new Error('Invalid state')
       }
 
-      return nativeCheckbox.nativeElement
+      return this.nativeCheckbox.nativeElement
     },
     forceLayout: () => {
       if (this._root) {
@@ -90,7 +83,7 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
     isAttachedToDOM: () => !!this._root
   }
 
-  private _foundation: {
+  private readonly _foundation: {
     init: Function,
     destroy: Function,
   } = new MDCCheckboxFoundation(this._mdcAdapter)
@@ -112,7 +105,7 @@ export class CheckboxComponent implements AfterViewInit, OnDestroy {
   }
 
   writeValue(value: any) {
-    this.checked = !! value
+    this.checked = !!value
   }
 
   registerOnChange(fn: (value: any) => void) {
