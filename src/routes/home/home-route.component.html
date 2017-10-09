@@ -1,9 +1,12 @@
 <mdc-form-field>
   <mdc-checkbox [(ngModel)]="isChecked"
-                (change)="handleChange()">
+                (change)="handleChange()"
+                >
   </mdc-checkbox>
   <label mdc-checkbox-label>
     The checkbox is {{status}}
   </label>
+  <div style="width:100px;height:100px;" mdc-ripple class="mdc-ripple-surface mdc-elevation--z2">
+  </div>
 </mdc-form-field>
 <p>{{changeEventCount}} change events so far</p>

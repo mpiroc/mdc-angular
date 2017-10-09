@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router'
 
 import { CheckboxModule } from '../mdc/checkbox/checkbox.module'
 import { FormFieldModule } from '../mdc/form-field/form-field.module'
+import { RippleModule } from '../mdc/ripple/ripple.module'
 import { ToolbarModule } from '../mdc/toolbar/toolbar.module'
 import { AppComponent } from './app.component'
 import { HomeRoute } from '../routes/home/home-route.component'
@@ -22,6 +23,7 @@ import { AppRoutes } from './app.routes'
     RouterModule.forRoot(AppRoutes),
     CheckboxModule,
     FormFieldModule,
+    RippleModule,
     ToolbarModule,
   ],
   providers: [],

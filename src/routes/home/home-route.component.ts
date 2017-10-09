@@ -1,8 +1,13 @@
-import { Component } from '@angular/core'
+import {
+  Component,
+  ViewEncapsulation,
+} from '@angular/core'
 
 @Component({
   selector: 'mdc-test-home',
   templateUrl: './home-route.component.html',
+  styleUrls: [ './home-route.component.scss' ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeRoute {
   isChecked: boolean = false

@@ -8,16 +8,10 @@ import {
   Renderer2,
   ViewChild,
   ViewEncapsulation,
-  forwardRef,
 } from '@angular/core'
-import {
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms'
 import { MDCToolbarFoundation } from '@material/toolbar'
 import { Unlisteners } from '../utils/unlisteners'
 
-
-type WindowUnlistenerMap = Map<Function, (this: Window, ev: UIEvent) => any>
 
 @Component({
   selector: 'mdc-toolbar',
@@ -25,13 +19,6 @@ type WindowUnlistenerMap = Map<Function, (this: Window, ev: UIEvent) => any>
   styleUrls: [ './toolbar.component.scss' ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ToolbarComponent),
-      multi: true,
-    }
-  ],
 })
 export class ToolbarComponent implements AfterViewInit, OnDestroy {
   @Input() title: string
