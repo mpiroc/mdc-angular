@@ -1,12 +1,30 @@
-<mdc-form-field>
-  <mdc-checkbox [(ngModel)]="isChecked"
-                (change)="handleChange()"
-                >
-  </mdc-checkbox>
-  <label mdc-checkbox-label>
-    The checkbox is {{status}}
-  </label>
-  <div style="width:100px;height:100px;" mdc-ripple class="mdc-ripple-surface mdc-elevation--z2">
-  </div>
-</mdc-form-field>
-<p>{{changeEventCount}} change events so far</p>
+<div class='main-container'>
+  <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isDisabledChecked" (change)="onDisabledChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Disabled</label>
+  </mdc-form-field>
+  <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isDenseChecked" (change)="onDenseChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Dense</label>
+  </mdc-form-field>
+  <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isRaisedChecked" (change)="onRaisedChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Raised</label>
+  </mdc-form-field>
+  <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isCompactChecked" (change)="onCompactChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Compact</label>
+  </mdc-form-field>
+  <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isColorChecked" (change)="onColorChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Color</label>
+  </mdc-form-field>
+  <mdc-button [disabled]="buttonDisabled$ | async"
+              [dense]="buttonDense$ | async"
+              [raised]="buttonRaised$ | async"
+              [compact]="buttonCompact$ | async"
+              [color]="buttonColor$ | async"
+              (onclick)=onClick($event)>
+    Click me
+  </mdc-button>
+</div>

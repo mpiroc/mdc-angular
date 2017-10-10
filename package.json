@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@material/animation": "^0.4.1",
+    "@material/button": "^0.7.1",
     "@material/checkbox": "^0.4.8",
     "@material/elevation": "^0.1.13",
     "@material/form-field": "^0.2.17",
