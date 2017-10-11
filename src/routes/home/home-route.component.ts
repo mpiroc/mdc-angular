@@ -16,14 +16,18 @@ export class HomeRoute {
   isDisabledChecked: boolean = false
   isDenseChecked: boolean = false
   isRaisedChecked: boolean = false
+  isUnelevatedChecked: boolean = false
   isCompactChecked: boolean = false
-  isColorChecked: boolean = false
+  isPrimaryChecked: boolean = false
+  isAccentChecked: boolean = false
 
   private readonly _buttonDisabled = new Subject<boolean>()
   private readonly _buttonDense = new Subject<boolean>()
   private readonly _buttonRaised = new Subject<boolean>()
+  private readonly _buttonUnelevated = new Subject<boolean>()
   private readonly _buttonCompact = new Subject<boolean>()
-  private readonly _buttonColor = new Subject<ButtonColor>()
+  private readonly _buttonPrimary = new Subject<boolean>()
+  private readonly _buttonAccent = new Subject<boolean>()
 
   get buttonDisabled$(): Observable<boolean> {
     return this._buttonDisabled
@@ -37,12 +41,20 @@ export class HomeRoute {
     return this._buttonRaised
   }
 
+  get buttonUnelevated$(): Observable<boolean> {
+    return this._buttonUnelevated
+  }
+
   get buttonCompact$(): Observable<boolean> {
     return this._buttonCompact
   }
 
-  get buttonColor$(): Observable<ButtonColor> {
-    return this._buttonColor
+  get buttonPrimary$(): Observable<boolean> {
+    return this._buttonPrimary
+  }
+
+  get buttonAccent$(): Observable<boolean> {
+    return this._buttonAccent
   }
 
   onDisabledChange() {
@@ -57,12 +69,20 @@ export class HomeRoute {
     this._buttonRaised.next(this.isRaisedChecked)
   }
 
+  onUnelevatedChange() {
+    this._buttonUnelevated.next(this.isUnelevatedChecked)
+  }
+
   onCompactChange() {
     this._buttonCompact.next(this.isCompactChecked)
   }
 
-  onColorChange() {
-    this._buttonColor.next(this.isColorChecked ? 'accent' : 'primary')
+  onPrimaryChange() {
+    this._buttonPrimary.next(this.isPrimaryChecked)
+  }
+
+  onAccentChange() {
+    this._buttonAccent.next(this.isAccentChecked)
   }
 
   onClick($event) {

@@ -12,18 +12,28 @@
     <label mdc-checkbox-label>Raised</label>
   </mdc-form-field>
   <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isUnelevatedChecked" (change)="onUnelevatedChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Unelevated</label>
+  </mdc-form-field>
+  <mdc-form-field>
     <mdc-checkbox [(ngModel)]="isCompactChecked" (change)="onCompactChange($event)"></mdc-checkbox>
     <label mdc-checkbox-label>Compact</label>
   </mdc-form-field>
   <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isColorChecked" (change)="onColorChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Color</label>
+    <mdc-checkbox [(ngModel)]="isPrimaryChecked" (change)="onPrimaryChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Primary</label>
+  </mdc-form-field>
+  <mdc-form-field>
+    <mdc-checkbox [(ngModel)]="isAccentChecked" (change)="onAccentChange($event)"></mdc-checkbox>
+    <label mdc-checkbox-label>Accent</label>
   </mdc-form-field>
   <mdc-button [disabled]="buttonDisabled$ | async"
               [dense]="buttonDense$ | async"
               [raised]="buttonRaised$ | async"
+              [unelevated]="buttonUnelevated$ | async"
               [compact]="buttonCompact$ | async"
-              [color]="buttonColor$ | async"
+              [primary]="buttonPrimary$ | async"
+              [accent]="buttonAccent$ | async"
               (onclick)=onClick($event)>
     Click me
   </mdc-button>

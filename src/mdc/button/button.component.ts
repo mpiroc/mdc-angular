@@ -25,8 +25,10 @@ export class ButtonComponent implements OnChanges {
   @Input() disabled: boolean = false
   @Input() dense: boolean = false
   @Input() raised: boolean = false
+  @Input() unelevated: boolean = false
   @Input() compact: boolean = false
-  @Input() color: ButtonColor = "primary"
+  @Input() primary: boolean = false
+  @Input() accent: boolean = false
   @ViewChild('nativeButton') nativeButton: ElementRef
 
   @Output('onclick') click = new EventEmitter<MouseEvent>()
@@ -45,43 +47,15 @@ export class ButtonComponent implements OnChanges {
       }
     }
 
-    const denseChange = changes['dense']
-    if (denseChange) {
-      if (denseChange.previousValue) {
-        this.removeClass('mdc-button--dense')
-      }
-      if (denseChange.currentValue) {
-        this.addClass('mdc-button--dense')
-      }
-    }
-
-    const raisedChange = changes['raised']
-    if (raisedChange) {
-      if (raisedChange.previousValue) {
-        this.removeClass('mdc-button--raised')
-      }
-      if (raisedChange.currentValue) {
-        this.addClass('mdc-button--raised')
-      }
-    }
-
-    const compactChange = changes['compact']
-    if (compactChange) {
-      if (compactChange.previousValue) {
-        this.removeClass('mdc-button--compact')
-      }
-      if (compactChange.currentValue) {
-        this.addClass('mdc-button--compact')
-      }
-    }
-
-    const colorChange = changes['color']
-    if (colorChange) {
-      if (colorChange.previousValue) {
-        this.removeClass(`mdc-button--${colorChange.previousValue}`)
-      }
-      if (colorChange.currentValue) {
-        this.addClass(`mdc-button--${colorChange.currentValue}`)
+    for (let modifier of ['dense', 'raised', 'unelevated', 'compact', 'primary', 'accent']) {
+      const change = changes[modifier]
+      if (change) {
+        if (change.previousValue) {
+          this.removeClass(`mdc-button--${modifier}`)
+        }
+        if (change.currentValue) {
+          this.addClass(`mdc-button--${modifier}`)
+        }
       }
     }
   }

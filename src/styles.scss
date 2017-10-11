@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@material/toolbar/variables';
+
+body, html {
+  margin: 0;
+  height: calc(100% - #{$mdc-toolbar-row-height} + 2 * #{$mdc-toolbar-element-vertical-padding});
+  width: 100%;
+}
