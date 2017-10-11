@@ -1,40 +1,60 @@
-<div class='main-container'>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isDisabledChecked" (change)="onDisabledChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Disabled</label>
-  </mdc-form-field>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isDenseChecked" (change)="onDenseChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Dense</label>
-  </mdc-form-field>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isRaisedChecked" (change)="onRaisedChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Raised</label>
-  </mdc-form-field>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isUnelevatedChecked" (change)="onUnelevatedChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Unelevated</label>
-  </mdc-form-field>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isCompactChecked" (change)="onCompactChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Compact</label>
-  </mdc-form-field>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isPrimaryChecked" (change)="onPrimaryChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Primary</label>
-  </mdc-form-field>
-  <mdc-form-field>
-    <mdc-checkbox [(ngModel)]="isAccentChecked" (change)="onAccentChange($event)"></mdc-checkbox>
-    <label mdc-checkbox-label>Accent</label>
-  </mdc-form-field>
-  <mdc-button [disabled]="buttonDisabled$ | async"
-              [dense]="buttonDense$ | async"
-              [raised]="buttonRaised$ | async"
-              [unelevated]="buttonUnelevated$ | async"
-              [compact]="buttonCompact$ | async"
-              [primary]="buttonPrimary$ | async"
-              [accent]="buttonAccent$ | async"
-              (onclick)=onClick($event)>
-    Click me
-  </mdc-button>
+<div class='mdc-layout-grid'>
+  <div class='mdc-layout-grid__inner'>
+    <div class='mdc-layout-grid__cell'>
+      <div class="mdct-button-options">
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isDisabledChecked" (change)="onDisabledChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Disabled</label>
+        </mdc-form-field>
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isDenseChecked" (change)="onDenseChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Dense</label>
+        </mdc-form-field>
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isRaisedChecked" (change)="onRaisedChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Raised</label>
+        </mdc-form-field>
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isUnelevatedChecked" (change)="onUnelevatedChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Unelevated</label>
+        </mdc-form-field>
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isCompactChecked" (change)="onCompactChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Compact</label>
+        </mdc-form-field>
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isPrimaryChecked" (change)="onPrimaryChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Primary</label>
+        </mdc-form-field>
+        <mdc-form-field>
+          <mdc-checkbox [(ngModel)]="isAccentChecked" (change)="onAccentChange($event)"></mdc-checkbox>
+          <label mdc-checkbox-label>Accent</label>
+        </mdc-form-field>
+      </div>
+    </div>
+    <div class='mdc-layout-grid__cell'>
+      <mdc-button [disabled]="buttonDisabled$ | async"
+                  [dense]="buttonDense$ | async"
+                  [raised]="buttonRaised$ | async"
+                  [unelevated]="buttonUnelevated$ | async"
+                  [compact]="buttonCompact$ | async"
+                  [primary]="buttonPrimary$ | async"
+                  [accent]="buttonAccent$ | async"
+                  (onclick)=onClick($event)>
+        Click me
+      </mdc-button>
+    </div>
+    <div class='mdc-layout-grid__cell' style="background: blue;">
+      &nbsp;
+    </div>
+    <div class='mdc-layout-grid__cell mdc-layout-grid__cell--span-2' style="background: red;">
+      &nbsp;
+    </div>
+    <div class='mdc-layout-grid__cell mdc-layout-grid__cell--span-8' style="background: green;">
+      &nbsp;
+    </div>
+    <div class='mdc-layout-grid__cell mdc-layout-grid__cell--span-2' style="background: blue;">
+      &nbsp;
+    </div>
+  </div>
 </div>

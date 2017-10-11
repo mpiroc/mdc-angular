@@ -49,10 +49,12 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
       this.renderer.removeClass(this.element, className)
     },
     registerInteractionHandler: (evtType: string, handler: EventListener) => {
-      this.unlisteners.listen(this.element, evtType, handler)
+      const target = evtType === 'mouseup' || evtType === 'pointerup' ? 'window' : this.element
+      this.unlisteners.listen(target, evtType, handler)
     },
     deregisterInteractionHandler: (evtType: string, handler: EventListener) => {
-      this.unlisteners.unlisten(evtType, handler)
+      const target = evtType === 'mouseup' || evtType === 'pointerup' ? 'window' : this.element
+      this.unlisteners.unlisten(target, handler)
     },
     registerResizeHandler: (handler: Function) => {
       this.unlisteners.listen('window', 'resize', handler)
