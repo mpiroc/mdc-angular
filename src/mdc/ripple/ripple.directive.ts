@@ -12,12 +12,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core'
 import { MDCRippleFoundation } from '@material/ripple'
-import { cssClasses } from '@material/ripple/constants'
 import {
   getMatchesProperty,
   supportsCssVariables,
 } from '@material/ripple/util'
 import { Unlisteners } from '../utils/unlisteners'
+import { updateModifiers } from '../utils/modifiers'
 
 @Directive({
   selector: '[mdc-ripple]',
@@ -92,14 +92,13 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['unbounded'] !== undefined) {
-      if (this.unbounded) {
-        this.mdcAdapter.addClass(cssClasses.UNBOUNDED)
-      }
-      else {
-        this.mdcAdapter.removeClass(cssClasses.UNBOUNDED)
-      }
-    }
+    updateModifiers(
+      this.renderer,
+      this.root,
+      changes,
+      'mdc-ripple',
+      { 'unbounded': 'unbounded' },
+    )
   }
 
   ngOnDestroy() {
