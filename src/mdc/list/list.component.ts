@@ -12,23 +12,23 @@ import {
 import { updateModifiers } from '../utils/modifiers'
 
 @Component({
-  selector: 'mdc-list',
-  templateUrl: './list.component.html',
+  selector: 'ul[mdc-list]',
+  template: '<ng-content></ng-content>',
   styleUrls: [ './list.component.scss' ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
   @Input() avatarList: boolean
-  @ViewChild('nativeList') nativeList: ElementRef
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private root: ElementRef) {
+    renderer.addClass(root.nativeElement, 'mdc-list')
   }
 
   ngOnChanges(changes: SimpleChanges) {
     updateModifiers(
       this.renderer,
-      this.nativeList,
+      this.root,
       changes,
       'mdc-list',
       { 'avatarList': 'avatar-list' },

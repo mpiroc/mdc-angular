@@ -12,23 +12,23 @@ import {
 import { updateModifiers } from '../utils/modifiers'
 
 @Component({
-  selector: 'mdc-list-item',
-  templateUrl: './list-item.component.html',
+  selector: 'li[mdc-list-item]',
+  template: '<ng-content></ng-content>',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItemComponent implements OnChanges {
   @Input() twoLine: boolean
   @Input() dense: boolean
-  @ViewChild('nativeListItem') nativeListItem: ElementRef
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private root: ElementRef) {
+    renderer.addClass(root.nativeElement, 'mdc-list-item')
   }
 
   ngOnChanges(changes: SimpleChanges) {
     updateModifiers(
       this.renderer,
-      this.nativeListItem,
+      this.root,
       changes,
       'mdc-list-item',
       {

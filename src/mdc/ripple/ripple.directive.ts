@@ -27,7 +27,7 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
   @Input() disabled: boolean
 
   private readonly unlisteners: Unlisteners
-  private get element() { return this.surface.nativeElement }
+  private get element() { return this.root.nativeElement }
 
   private mdcAdapter: MDCRippleAdapter = {
     browserSupportsCssVars: () => {
@@ -82,8 +82,9 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
     activate: Function,
   } = new MDCRippleFoundation(this.mdcAdapter)
 
-  constructor(private renderer: Renderer2, private surface: ElementRef) {
+  constructor(private renderer: Renderer2, private root: ElementRef) {
     this.unlisteners = new Unlisteners(renderer)
+    renderer.addClass(root.nativeElement, 'mdc-ripple-surface')
   }
 
   ngAfterViewInit() {
