@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router'
 
 import { ButtonModule } from '../mdc/button/button.module'
 import { CheckboxModule } from '../mdc/checkbox/checkbox.module'
+import { DrawerModule } from '../mdc/drawer/drawer.module'
 import { FormFieldModule } from '../mdc/form-field/form-field.module'
 import { ListModule } from '../mdc/list/list.module'
 import { RippleModule } from '../mdc/ripple/ripple.module'
@@ -25,6 +26,7 @@ import { AppRoutes } from './app.routes'
     RouterModule.forRoot(AppRoutes),
     ButtonModule,
     CheckboxModule,
+    DrawerModule,
     FormFieldModule,
     ListModule,
     RippleModule,

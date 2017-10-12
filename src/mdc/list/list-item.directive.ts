@@ -1,23 +1,17 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
+  Directive,
   ElementRef,
   Input,
   OnChanges,
   Renderer2,
   SimpleChanges,
-  ViewChild,
-  ViewEncapsulation,
 } from '@angular/core'
 import { updateModifiers } from '../utils/modifiers'
 
-@Component({
-  selector: 'li[mdc-list-item]',
-  template: '<ng-content></ng-content>',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: '[mdc-list-item]',
 })
-export class ListItemComponent implements OnChanges {
+export class ListItemDirective implements OnChanges {
   @Input() twoLine: boolean
   @Input() dense: boolean
 

@@ -1,24 +1,17 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
+  Directive,
   ElementRef,
   Input,
   OnChanges,
   Renderer2,
   SimpleChanges,
-  ViewChild,
-  ViewEncapsulation,
 } from '@angular/core'
 import { updateModifiers } from '../utils/modifiers'
 
-@Component({
-  selector: 'ul[mdc-list]',
-  template: '<ng-content></ng-content>',
-  styleUrls: [ './list.component.scss' ],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: '[mdc-list]',
 })
-export class ListComponent {
+export class ListDirective implements OnChanges {
   @Input() avatarList: boolean
 
   constructor(private renderer: Renderer2, private root: ElementRef) {

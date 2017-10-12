@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core'
-import { ListComponent } from './list.component'
-import { ListItemComponent } from './list-item.component'
+import { ListDirective } from './list.directive'
+import { ListItemDirective } from './list-item.directive'
+import { ListItemStartDetailDirective } from './list-item-start-detail.directive'
+import { ListItemEndDetailDirective } from './list-item-end-detail.directive'
 
 const EXPORTS = [
-  ListComponent,
-  ListItemComponent,
+  ListDirective,
+  ListItemDirective,
+  ListItemStartDetailDirective,
+  ListItemEndDetailDirective,
 ]
 
 @NgModule({
