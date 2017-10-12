@@ -18,7 +18,7 @@ import { updateModifiers } from '../utils/modifiers'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItemComponent implements OnChanges {
-  @Input('two-line') twoLine: boolean
+  @Input() twoLine: boolean
   @Input() dense: boolean
   @ViewChild('nativeListItem') nativeListItem: ElementRef
 
@@ -31,7 +31,10 @@ export class ListItemComponent implements OnChanges {
       this.nativeListItem,
       changes,
       'mdc-list-item',
-      ['avatar-list', 'two-line'],
+      {
+        'twoLine': 'two-line',
+        'dense': 'dense',
+      },
     )
   }
 }

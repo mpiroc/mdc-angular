@@ -4,7 +4,6 @@ import {
 } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Subject } from 'rxjs/Subject'
-import { ButtonColor } from '../../mdc/button/button.component'
 
 @Component({
   selector: 'mdc-test-home',

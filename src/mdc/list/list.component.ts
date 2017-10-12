@@ -19,7 +19,7 @@ import { updateModifiers } from '../utils/modifiers'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
-  @Input('avatar-list') avatarList: boolean
+  @Input() avatarList: boolean
   @ViewChild('nativeList') nativeList: ElementRef
 
   constructor(private renderer: Renderer2) {
@@ -31,7 +31,7 @@ export class ListComponent {
       this.nativeList,
       changes,
       'mdc-list',
-      ['avatar-list'],
+      { 'avatarList': 'avatar-list' },
     )
   }
 }

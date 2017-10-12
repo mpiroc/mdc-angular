@@ -51,7 +51,14 @@ export class ButtonComponent implements OnChanges {
       this.nativeButton,
       changes,
       'mdc-button',
-      ['dense', 'raised', 'unelevated', 'compact', 'primary', 'accent'],
+      {
+        'dense': 'dense',
+        'raised': 'raised',
+        'unelevated': 'unelevated',
+        'compact': 'compact',
+        'primary': 'primary',
+        'accent': 'accent',
+      },
     )
   }
 

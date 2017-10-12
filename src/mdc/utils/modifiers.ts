@@ -9,10 +9,11 @@ export function updateModifiers(
   nativeElementRef: ElementRef,
   changes: SimpleChanges,
   baseClass: string,
-  modifiers: string[],
+  modifiers: { [key: string]: string },
 ): void {
-  for (let modifier of modifiers) {
-    const change = changes[modifier]
+  for (let key in modifiers) {
+    const change = changes[key]
+    const modifier = modifiers[key]
     if (change) {
       if (change.previousValue) {
         renderer.removeClass(nativeElementRef.nativeElement, `${baseClass}--${modifier}`)
