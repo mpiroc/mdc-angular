@@ -28,6 +28,7 @@
     "@material/elevation": "^0.1.13",
     "@material/form-field": "^0.2.17",
     "@material/layout-grid": "^0.4.4",
+    "@material/list": "^0.2.20",
     "@material/ripple": "^0.8.8",
     "@material/toolbar": "^0.4.11",
     "@material/typography": "^0.3.0",

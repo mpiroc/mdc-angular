@@ -11,8 +11,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core'
-
-export type ButtonColor = "primary" | "accent"
+import { updateModifiers } from '../utils/modifiers'
 
 @Component({
   selector: 'mdc-button',
@@ -47,28 +46,16 @@ export class ButtonComponent implements OnChanges {
       }
     }
 
-    for (let modifier of ['dense', 'raised', 'unelevated', 'compact', 'primary', 'accent']) {
-      const change = changes[modifier]
-      if (change) {
-        if (change.previousValue) {
-          this.removeClass(`mdc-button--${modifier}`)
-        }
-        if (change.currentValue) {
-          this.addClass(`mdc-button--${modifier}`)
-        }
-      }
-    }
+    updateModifiers(
+      this.renderer,
+      this.nativeButton,
+      changes,
+      'mdc-button',
+      ['dense', 'raised', 'unelevated', 'compact', 'primary', 'accent'],
+    )
   }
 
   onClick($event: MouseEvent) {
     this.click.emit($event)
-  }
-
-  private addClass(newClass: string) {
-    this.renderer.addClass(this.nativeButton.nativeElement, newClass)
-  }
-
-  private removeClass(oldClass: string) {
-    this.renderer.removeClass(this.nativeButton.nativeElement, oldClass)
   }
 }

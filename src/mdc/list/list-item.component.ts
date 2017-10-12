@@ -6,30 +6,32 @@ import {
   OnChanges,
   Renderer2,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core'
 import { updateModifiers } from '../utils/modifiers'
 
 @Component({
-  selector: 'mdc-form-field',
-  styleUrls: [ './form-field.component.scss'],
-  template: '<ng-content></ng-content>',
+  selector: 'mdc-list-item',
+  templateUrl: './list-item.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormFieldComponent {
-  @Input('align-end') alignEnd: boolean = false
+export class ListItemComponent implements OnChanges {
+  @Input('two-line') twoLine: boolean
+  @Input() dense: boolean
+  @ViewChild('nativeListItem') nativeListItem: ElementRef
 
-  constructor(private renderer: Renderer2, private root: ElementRef) {
+  constructor(private renderer: Renderer2) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
     updateModifiers(
       this.renderer,
-      this.root,
+      this.nativeListItem,
       changes,
-      'mdc-form-field',
-      ['align-end'],
+      'mdc-list-item',
+      ['avatar-list', 'two-line'],
     )
   }
 }
