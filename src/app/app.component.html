@@ -1,7 +1,17 @@
-<mdc-toolbar title="Cardinal">
-  <mdc-button [unelevated]="true">Home</mdc-button>
-  <mdc-button [unelevated]="true">Sign In</mdc-button>
-</mdc-toolbar>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<header mdc-toolbar title="Cardinal" [fixed]="true">
+  <mdc-toolbar-row>
+    <section mdc-toolbar-section [alignStart]="true">
+      <span mdc-toolbar-title>{{title}}</span>
+    </section>
+    <section mdc-toolbar-section [alignEnd]="true">
+      <button mdc-button mdc-ripple [unelevated]="true">Home</button>
+      <button mdc-button mdc-ripple [unelevated]="true">Sign In</button>
+    </section>
+  </mdc-toolbar-row>
+</header>
+<div class="content">
+  <nav mdc-drawer></nav>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

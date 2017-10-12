@@ -12,12 +12,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core'
 import { MDCRippleFoundation } from '@material/ripple'
-import { cssClasses } from '@material/ripple/constants'
 import {
   getMatchesProperty,
   supportsCssVariables,
 } from '@material/ripple/util'
 import { Unlisteners } from '../utils/unlisteners'
+import { updateModifiers } from '../utils/modifiers'
 
 @Directive({
   selector: '[mdc-ripple]',
@@ -27,7 +27,7 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
   @Input() disabled: boolean
 
   private readonly unlisteners: Unlisteners
-  private get element() { return this.surface.nativeElement }
+  private get element() { return this.root.nativeElement }
 
   private mdcAdapter: MDCRippleAdapter = {
     browserSupportsCssVars: () => {
@@ -82,8 +82,9 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
     activate: Function,
   } = new MDCRippleFoundation(this.mdcAdapter)
 
-  constructor(private renderer: Renderer2, private surface: ElementRef) {
+  constructor(private renderer: Renderer2, private root: ElementRef) {
     this.unlisteners = new Unlisteners(renderer)
+    renderer.addClass(root.nativeElement, 'mdc-ripple-surface')
   }
 
   ngAfterViewInit() {
@@ -91,14 +92,13 @@ export class RippleDirective implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['unbounded'] !== undefined) {
-      if (this.unbounded) {
-        this.mdcAdapter.addClass(cssClasses.UNBOUNDED)
-      }
-      else {
-        this.mdcAdapter.removeClass(cssClasses.UNBOUNDED)
-      }
-    }
+    updateModifiers(
+      this.renderer,
+      this.root,
+      changes,
+      'mdc-ripple',
+      { 'unbounded': 'unbounded' },
+    )
   }
 
   ngOnDestroy() {

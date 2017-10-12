@@ -33,16 +33,17 @@
       </div>
     </div>
     <div class='mdc-layout-grid__cell'>
-      <mdc-button [disabled]="buttonDisabled$ | async"
-                  [dense]="buttonDense$ | async"
-                  [raised]="buttonRaised$ | async"
-                  [unelevated]="buttonUnelevated$ | async"
-                  [compact]="buttonCompact$ | async"
-                  [primary]="buttonPrimary$ | async"
-                  [accent]="buttonAccent$ | async"
-                  (onclick)=onClick($event)>
+      <button mdc-button mdc-ripple
+        [disabled]="buttonDisabled$ | async"
+        [dense]="buttonDense$ | async"
+        [raised]="buttonRaised$ | async"
+        [unelevated]="buttonUnelevated$ | async"
+        [compact]="buttonCompact$ | async"
+        [primary]="buttonPrimary$ | async"
+        [accent]="buttonAccent$ | async"
+        (click)=onClick($event)>
         Click me
-      </mdc-button>
+      </button>
     </div>
     <div class='mdc-layout-grid__cell' style="background: blue;">
       &nbsp;

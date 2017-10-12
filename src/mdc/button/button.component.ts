@@ -11,12 +11,11 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core'
-
-export type ButtonColor = "primary" | "accent"
+import { updateModifiers } from '../utils/modifiers'
 
 @Component({
-  selector: 'mdc-button',
-  templateUrl: './button.component.html',
+  selector: 'button[mdc-button]',
+  template: '<ng-content></ng-content>',
   styleUrls: [ './button.component.scss' ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,46 +28,41 @@ export class ButtonComponent implements OnChanges {
   @Input() compact: boolean = false
   @Input() primary: boolean = false
   @Input() accent: boolean = false
-  @ViewChild('nativeButton') nativeButton: ElementRef
 
   @Output('onclick') click = new EventEmitter<MouseEvent>()
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private root: ElementRef) {
+    renderer.addClass(root.nativeElement, 'mdc-button')
   }
 
   ngOnChanges(changes: SimpleChanges) {
     const disabledChange = changes['disabled']
     if (disabledChange) {
       if (disabledChange.previousValue) {
-        this.renderer.removeAttribute(this.nativeButton.nativeElement, "disabled")
+        this.renderer.removeAttribute(this.root.nativeElement, "disabled")
       }
       if (disabledChange.currentValue) {
-        this.renderer.setAttribute(this.nativeButton.nativeElement, "disabled", undefined)
+        this.renderer.setAttribute(this.root.nativeElement, "disabled", undefined)
       }
     }
 
-    for (let modifier of ['dense', 'raised', 'unelevated', 'compact', 'primary', 'accent']) {
-      const change = changes[modifier]
-      if (change) {
-        if (change.previousValue) {
-          this.removeClass(`mdc-button--${modifier}`)
-        }
-        if (change.currentValue) {
-          this.addClass(`mdc-button--${modifier}`)
-        }
-      }
-    }
+    updateModifiers(
+      this.renderer,
+      this.root,
+      changes,
+      'mdc-button',
+      {
+        'dense': 'dense',
+        'raised': 'raised',
+        'unelevated': 'unelevated',
+        'compact': 'compact',
+        'primary': 'primary',
+        'accent': 'accent',
+      },
+    )
   }
 
   onClick($event: MouseEvent) {
     this.click.emit($event)
-  }
-
-  private addClass(newClass: string) {
-    this.renderer.addClass(this.nativeButton.nativeElement, newClass)
-  }
-
-  private removeClass(oldClass: string) {
-    this.renderer.removeClass(this.nativeButton.nativeElement, oldClass)
   }
 }

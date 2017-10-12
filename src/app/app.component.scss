@@ -1,5 +1,12 @@
 @import '@material/toolbar/variables';
 
 main {
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  height: 100%;
   margin-top: $mdc-toolbar-row-height;
 }
