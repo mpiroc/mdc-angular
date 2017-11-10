@@ -8,7 +8,8 @@ import {
 
 @Component({
   selector: 'nav[mdc-drawer]',
-  templateUrl: './drawer.component.html',
+  //templateUrl: './drawer.component.html',
+  template: '<ng-content></ng-content>',
   styleUrls: [ './drawer.component.scss' ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

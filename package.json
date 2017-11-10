@@ -23,6 +23,7 @@
     "@angular/router": "^4.2.4",
     "@material/animation": "^0.4.1",
     "@material/button": "^0.7.1",
+    "@material/card": "^0.24.0",
     "@material/checkbox": "^0.4.8",
     "@material/drawer": "^0.5.9",
     "@material/elevation": "^0.1.13",

@@ -10,3 +10,8 @@ main {
   height: 100%;
   margin-top: $mdc-toolbar-row-height;
 }
+
+nav.mdc-list {
+  padding-left: 0;
+  padding-right: 0;
+}
