@@ -27,7 +27,7 @@ import { AppRoutes } from './app.routes'
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(AppRoutes, {
-      enableTracing: true,
+      //enableTracing: true,
       useHash: true,
     }),
     ButtonModule,

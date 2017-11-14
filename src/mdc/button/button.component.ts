@@ -22,13 +22,6 @@ import { updateModifiers } from '../utils/modifiers'
 })
 export class ButtonComponent implements OnChanges {
   @Input() disabled: boolean = false
-  @Input() dense: boolean = false
-  @Input() raised: boolean = false
-  @Input() unelevated: boolean = false
-  @Input() compact: boolean = false
-  @Input() primary: boolean = false
-  @Input() accent: boolean = false
-
   @Output('onclick') click = new EventEmitter<MouseEvent>()
 
   constructor(private renderer: Renderer2, private root: ElementRef) {
@@ -45,21 +38,6 @@ export class ButtonComponent implements OnChanges {
         this.renderer.setAttribute(this.root.nativeElement, "disabled", undefined)
       }
     }
-
-    updateModifiers(
-      this.renderer,
-      this.root,
-      changes,
-      'mdc-button',
-      {
-        'dense': 'dense',
-        'raised': 'raised',
-        'unelevated': 'unelevated',
-        'compact': 'compact',
-        'primary': 'primary',
-        'accent': 'accent',
-      },
-    )
   }
 
   onClick($event: MouseEvent) {

@@ -7,14 +7,14 @@ import {
 } from '@angular/core'
 
 @Component({
-  selector: '[mdc-card]',
+  selector: 'section[mdc-card-subtitle]',
   template: '<ng-content></ng-content>',
   styleUrls: [ './card.component.scss' ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent {
+export class CardSubtitleComponent {
   constructor(private renderer: Renderer2, private root: ElementRef) {
-    renderer.addClass(root.nativeElement, 'mdc-card')
+    renderer.addClass(root.nativeElement, 'mdc-card__subtitle')
   }
 }
