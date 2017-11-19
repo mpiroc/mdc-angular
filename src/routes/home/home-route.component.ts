@@ -83,8 +83,4 @@ export class HomeRoute {
   onAccentChange() {
     this._buttonAccent.next(this.isAccentChecked)
   }
-
-  onClick($event) {
-    console.log("in HomeRoute.onClick")
-  }
 }
