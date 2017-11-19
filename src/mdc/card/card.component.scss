@@ -2,3 +2,9 @@
 @import '@material/elevation/mdc-elevation.scss';
 @import '@material/ripple/mdc-ripple.scss';
 @import '@material/typography/mdc-typography.scss';
+@import '@material/theme/mixins';
+
+/* MDC Web styles subtitles as primary text, but we want to treat it as secondary text. */
+.mdc-card__subtitle {
+  @include mdc-theme-prop(color, text-secondary-on-background);
+}

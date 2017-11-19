@@ -8,7 +8,6 @@ import {
 
 @Component({
   selector: 'nav[mdc-drawer]',
-  //templateUrl: './drawer.component.html',
   template: '<ng-content></ng-content>',
   styleUrls: [ './drawer.component.scss' ],
   encapsulation: ViewEncapsulation.None,
@@ -17,7 +16,6 @@ import {
 export class DrawerComponent {
   constructor(private renderer: Renderer2, private root: ElementRef) {
     renderer.addClass(root.nativeElement, "mdc-permanent-drawer")
-    renderer.addClass(root.nativeElement, "mdc-typography")
     renderer.addClass(root.nativeElement, "mdc-elevation--z6")
   }
 }
