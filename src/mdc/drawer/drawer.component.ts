@@ -18,5 +18,6 @@ export class DrawerComponent {
   constructor(private renderer: Renderer2, private root: ElementRef) {
     renderer.addClass(root.nativeElement, "mdc-permanent-drawer")
     renderer.addClass(root.nativeElement, "mdc-typography")
+    renderer.addClass(root.nativeElement, "mdc-elevation--z6")
   }
 }
